@@ -74,7 +74,7 @@ final class Table
 
     protected function render(): void
     {
-        $this->driver = instance($this->driverClass, $this->output);
+        $this->driver = class_exists($this->driverClass) ? new $this->driverClass($this->output) : null;
 
         $this->driver->setHeaders($this->getColumnLabel());
 

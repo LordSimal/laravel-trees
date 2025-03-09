@@ -108,7 +108,7 @@ class Collection extends BaseCollection
                 }
             }
 
-            $node->setRelation('children', static::make($children));
+            $node->setRelation('children', new static($children));
         }
 
         $this->linked = true;

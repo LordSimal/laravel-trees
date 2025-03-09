@@ -21,7 +21,9 @@ abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
 
     protected static function model(array $attributes = []): Model
     {
-        return instance(static::modelClass(), $attributes);
+        $modelClass = static::modelClass();
+
+        return new $modelClass($attributes);
     }
 
     private static function dbMigrate(): void

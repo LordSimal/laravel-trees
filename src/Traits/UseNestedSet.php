@@ -288,12 +288,12 @@ trait UseNestedSet
      */
     protected function onDeletingNodeHasChildren(): void
     {
-        // throw DeletedNodeHasChildrenException::make($this);
+        // throw new DeletedNodeHasChildrenException($this);
     }
 
     protected static function resolveChildrenHandler(string $value): ChildrenHandler
     {
-        $remover = instance($value);
+        $remover = class_exists($value) ? new $value : null;
         if (! $remover instanceof ChildrenHandler) {
             throw new Exception('Invalid ChildrenHandler for `delete`');
         }
@@ -371,7 +371,8 @@ trait UseNestedSet
 
     protected function generateTreeId(): string|int
     {
-        $generator = instance($this->treeIdGenerator(), $this->treeAttribute());
+        $treeGeneratorClass = $this->treeIdGenerator();
+        $generator = class_exists($treeGeneratorClass) ? new $treeGeneratorClass($this->treeAttribute()) : null;
         if ($generator instanceof GeneratorTreeIdContract) {
             return $generator->generateId($this);
         }

@@ -1,3 +1,6 @@
+
+[![codecov](https://codecov.io/gh/LordSimal/laravel-trees/graph/badge.svg?token=hCVUJyRb3D)](https://codecov.io/gh/LordSimal/laravel-trees)
+
 # Laravel Trees
 
 __Contents:__

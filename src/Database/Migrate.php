@@ -7,19 +7,22 @@ namespace LordSimal\LaravelTrees\Database;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use LordSimal\LaravelTrees\Config\Builder;
-use Php\Support\Exceptions\InvalidConfigException;
+use LordSimal\LaravelTrees\Exceptions\InvalidConfigException;
 
 final class Migrate
 {
     public function __construct(protected Builder $builder, protected Blueprint $table) {}
 
     /**
-     * @throws \Php\Support\Exceptions\InvalidConfigException
+     * @throws \LordSimal\LaravelTrees\Exceptions\InvalidConfigException
      */
     public static function columnsFromModel(Blueprint $table, Model|string $model): Builder
     {
-        /** @var \Illuminate\Database\Eloquent\Model $instance */
-        $instance = instance($model);
+        if (is_string($model)) {
+            $instance = new $model;
+        } else {
+            $instance = $model;
+        }
 
         if (method_exists($instance, 'getTreeBuilder')) {
             (new self($builder = $instance->getTreeBuilder(), $table))->buildColumns();

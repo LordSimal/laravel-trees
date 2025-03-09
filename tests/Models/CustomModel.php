@@ -41,20 +41,20 @@ class CustomModel extends AbstractMultiModel
     {
         return Builder::defaultMulti()
             ->setAttribute(
-                Attribute::make(AttributeType::Tree, FieldType::UUID)
+                (new Attribute(AttributeType::Tree, FieldType::UUID))
                     ->setColumnName(self::TREE_ID),
             )->setAttribute(
-                Attribute::make(AttributeType::Parent, FieldType::UUID)
+                (new Attribute(AttributeType::Parent, FieldType::UUID))
                     ->setColumnName(self::PARENT_ID)
                     ->setNullable()
             )->setAttribute(
-                Attribute::make(AttributeType::Left)
+                (new Attribute(AttributeType::Left))
                     ->setColumnName('custom_left')
             )->setAttribute(
-                Attribute::make(AttributeType::Right)
+                (new Attribute(AttributeType::Right))
                     ->setColumnName('custom_right')
             )->setAttribute(
-                Attribute::make(AttributeType::Level)
+                (new Attribute(AttributeType::Level))
                     ->setColumnName('custom_level')
             );
     }

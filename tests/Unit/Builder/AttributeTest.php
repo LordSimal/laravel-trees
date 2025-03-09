@@ -15,7 +15,7 @@ class AttributeTest extends AbstractTestCase
     #[Test]
     public function create_attribute(): void
     {
-        $attr = Attribute::make(AttributeType::Left);
+        $attr = new Attribute(AttributeType::Left);
 
         static::assertEquals(AttributeType::Left, $attr->name());
         static::assertEquals(AttributeType::Left->value, $attr->name()->value);
@@ -29,7 +29,7 @@ class AttributeTest extends AbstractTestCase
     #[Test]
     public function change_column_name(): void
     {
-        $attr = Attribute::make(AttributeType::Left);
+        $attr = new Attribute(AttributeType::Left);
         static::assertEquals(AttributeType::Left->value, $attr->columnName());
 
         $attr->setColumnName('test');
@@ -39,7 +39,7 @@ class AttributeTest extends AbstractTestCase
     #[Test]
     public function change_default(): void
     {
-        $attr = Attribute::make(AttributeType::Left);
+        $attr = new Attribute(AttributeType::Left);
 
         static::assertNull($attr->default());
 

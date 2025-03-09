@@ -16,13 +16,13 @@ class BuilderTest extends AbstractTestCase
     #[Test]
     public function create_builder(): void
     {
-        $builder = Builder::make();
+        $builder = new Builder();
         $builder
             ->setAttributes(
-                Attribute::make(AttributeType::Left),
-                Attribute::make(AttributeType::Right),
-                Attribute::make(AttributeType::Level),
-                Attribute::make(AttributeType::Parent),
+                new Attribute(AttributeType::Left),
+                new Attribute(AttributeType::Right),
+                new Attribute(AttributeType::Level),
+                new Attribute(AttributeType::Parent),
             );
 
         static::assertEquals(AttributeType::Left->value, (string) $builder->left());

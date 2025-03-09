@@ -40,7 +40,7 @@ trait DeleteNode
 
     protected static function resolveDeleterWithChildren(string $value): DeleteStrategy
     {
-        $remover = instance($value);
+        $remover = class_exists($value) ? new $value : null;
         if (! $remover instanceof DeleteStrategy) {
             throw new Exception('Invalid Delete Strategy for `deleteWithChildren`');
         }

@@ -7,15 +7,9 @@ namespace LordSimal\LaravelTrees\Config;
 use Illuminate\Database\Eloquent\Model;
 use LordSimal\LaravelTrees\Strategy\DeleteWithChildren;
 use LordSimal\LaravelTrees\Strategy\MoveChildrenToParent;
-use Php\Support\Traits\Maker;
 
-/**
- * @method static \LordSimal\LaravelTrees\Config\Builder make()
- */
 class Builder
 {
-    use Maker;
-
     protected Attribute $left;
 
     protected Attribute $right;
@@ -74,12 +68,12 @@ class Builder
 
     public static function default(): self
     {
-        return static::make()->setAttributes(...self::attributesForUnoTree());
+        return (new static)->setAttributes(...self::attributesForUnoTree());
     }
 
     public static function defaultMulti(): self
     {
-        return static::make()->setAttributes(...self::attributesForMultiTree());
+        return (new static)->setAttributes(...self::attributesForMultiTree());
     }
 
     /**
@@ -91,7 +85,7 @@ class Builder
             new Attribute(AttributeType::Left),
             new Attribute(AttributeType::Right),
             new Attribute(AttributeType::Level),
-            Attribute::make(AttributeType::Parent)->setNullable(),
+            (new Attribute(AttributeType::Parent))->setNullable(),
         ];
     }
 

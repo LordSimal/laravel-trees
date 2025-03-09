@@ -4,15 +4,8 @@ declare(strict_types=1);
 
 namespace LordSimal\LaravelTrees\Config;
 
-use Php\Support\Traits\Maker;
-
-/**
- * @method static static make(\LordSimal\LaravelTrees\Config\AttributeType $name, \LordSimal\LaravelTrees\Config\FieldType $type = \LordSimal\LaravelTrees\Config\FieldType::UnsignedInteger)
- */
 class Attribute
 {
-    use Maker;
-
     protected string $column;
 
     protected bool $nullable = false;
