@@ -85,10 +85,22 @@ jobs:
         run: composer info | grep -e lordsimal -e laravel/framework -e phpunit/phpunit -e orchestra/testbench
 
       - name: Run test suite
-        run: composer test
+        run: |
+            if [[ ${{ matrix.php }} == '8.3' && "${{ matrix.laravel }}" == "12.*" ]]; then
+                vendor/bin/phpunit --coverage-clover=coverage.xml
+            else
+                vendor/bin/phpunit
+            fi
         env:
           DB_HOST: localhost
           DB_PORT: ${{ job.services.postgres.ports[5432] }}
 
       - name: Run CS checks
         run: composer cs-check
+
+      - name: Upload coverage reports to Codecov
+        if: success() && matrix.php == '8.3' && matrix.laravel == '12.*'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: LordSimal/laravel-trees
