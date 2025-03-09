@@ -3,13 +3,13 @@
 Build and draw table from the Tree:
 
 ```php
-Table::fromModel($rootNode)->draw();
+\LordSimal\LaravelTrees\Table::fromModel($rootNode)->draw();
 ```
 
 ```php
 $collection = Category::all();
 
-Table::fromTree($collection->toTree())
+\LordSimal\LaravelTrees\Table::fromTree($collection->toTree())
     ->hideLevel()
     ->setExtraColumns(
         [

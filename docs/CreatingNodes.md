@@ -9,9 +9,9 @@ A Node is usual a Laravel Model. First Node is named `Root Node` (or `Root`). Th
 Root nodes needs be specified as such.
 
 ```php
-Category::make($attributes)->makeRoot()->save(); 
+new Category($attributes)->makeRoot()->save(); 
 // or
-Category::make($attributes)->saveAsRoot();
+new Category($attributes)->saveAsRoot();
 ```
 
 ## Creating sub nodes

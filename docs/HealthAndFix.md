@@ -27,12 +27,12 @@ It returns an array with following keys:
 For single tree:
 
 ```php
-Node::fixTree();
+Category::fixTree();
 ```
 
 For multi tree:
 
 ```php
-Node::fixMultiTree();
+Category::fixMultiTree();
 ```
 
