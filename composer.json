@@ -1,0 +1,55 @@
+{
+  "name": "lordsimal/laravel-trees",
+  "description": "Multi-Tree structures for Laravel",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "tree",
+    "multi-tree",
+    "laravel",
+    "package"
+  ],
+  "authors": [
+    {
+      "name": "Eugene Fureev",
+      "email": "fureev@gmail.com"
+    },
+    {
+      "name": "Kevin Pfeifer",
+      "email": "info@pfeiferkevin.at"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "efureev/support": "^4.27 || ^5.0",
+    "illuminate/database": "^12.0"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.45",
+    "laravel/pint": "^1.21",
+    "orchestra/testbench": "^9.11 || ^10.0",
+    "phpunit/phpunit": "^11.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "LordSimal\\LaravelTrees\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LordSimal\\LaravelTrees\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true
+    }
+  },
+  "scripts": {
+    "cs": "vendor/bin/pint",
+    "cs-check": "vendor/bin/pint --test",
+    "test": "vendor/bin/phpunit --no-coverage",
+    "coverage": "php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html coverage"
+  }
+}
