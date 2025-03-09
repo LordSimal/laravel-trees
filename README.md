@@ -1,4 +1,8 @@
-
+[![Latest Stable Version](http://poser.pugx.org/lordsimal/laravel-trees/v)](https://packagist.org/packages/lordsimal/laravel-trees) 
+[![Total Downloads](http://poser.pugx.org/lordsimal/laravel-trees/downloads)](https://packagist.org/packages/lordsimal/laravel-trees) 
+[![Latest Unstable Version](http://poser.pugx.org/lordsimal/laravel-trees/v/unstable)](https://packagist.org/packages/lordsimal/laravel-trees) 
+[![License](http://poser.pugx.org/lordsimal/laravel-trees/license)](https://packagist.org/packages/lordsimal/laravel-trees) 
+[![PHP Version Require](http://poser.pugx.org/lordsimal/laravel-trees/require/php)](https://packagist.org/packages/lordsimal/laravel-trees)
 [![codecov](https://codecov.io/gh/LordSimal/laravel-trees/graph/badge.svg?token=hCVUJyRb3D)](https://codecov.io/gh/LordSimal/laravel-trees)
 
 # Laravel Trees
