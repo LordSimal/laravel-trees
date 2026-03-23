@@ -13,7 +13,7 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     /**
      * @return class-string<Category>
      */
-    protected static function modelClass(): string
+    protected function modelClass(): string
     {
         return Category::class;
     }
@@ -22,135 +22,135 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     public function link_nodes(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         /** @var Category $node1 */
-        $node1 = static::model(['title' => 'node 1']);
+        $node1 = $this->model(['title' => 'node 1']);
         $node1->appendTo($modelRoot)->save();
 
         /** @var Category $node21 */
-        $node21 = static::model(['title' => 'child 2.1']);
+        $node21 = $this->model(['title' => 'child 2.1']);
         $node21->appendTo($node1)->save();
 
         /** @var Category $node31 */
-        $node31 = static::model(['title' => 'child 3.1']);
+        $node31 = $this->model(['title' => 'child 3.1']);
         $node31->appendTo($node21)->save();
 
-        $preQueryCount = count(static::model()->getConnection()->getQueryLog());
+        $preQueryCount = count($this->model()->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         /** @var Collection $collection */
-        $collection = static::model()::all();
+        $collection = $this->model()::all();
 
-        static::assertCount(4, $collection);
+        $this->assertCount(4, $collection);
 
         $collection->linkNodes();
 
-        static::assertCount(4, $collection);
+        $this->assertCount(4, $collection);
 
         $roots = $collection->filter(fn (Category $model) => $model->isRoot());
-        static::assertCount(1, $roots);
+        $this->assertCount(1, $roots);
 
         /** @var Category $root */
         $root = $roots->first();
-        static::assertNull($root->parent);
-        static::assertCount(1, $root->children);
+        $this->assertNull($root->parent);
+        $this->assertCount(1, $root->children);
 
         /** @var Category $expNode1 */
         $expNode1 = $root->children->first();
-        static::assertCount(1, $expNode1->children);
-        static::assertTrue($root->isEqualTo($expNode1->parent));
+        $this->assertCount(1, $expNode1->children);
+        $this->assertTrue($root->isEqualTo($expNode1->parent));
 
         /** @var Category $expNode21 */
         $expNode21 = $expNode1->children->first();
-        static::assertCount(1, $expNode21->children);
-        static::assertTrue($expNode1->isEqualTo($expNode21->parent));
+        $this->assertCount(1, $expNode21->children);
+        $this->assertTrue($expNode1->isEqualTo($expNode21->parent));
 
         /** @var Category $expNode31 */
         $expNode31 = $expNode21->children->first();
-        static::assertCount(0, $expNode31->children);
-        static::assertTrue($expNode21->isEqualTo($expNode31->parent));
+        $this->assertCount(0, $expNode31->children);
+        $this->assertTrue($expNode21->isEqualTo($expNode31->parent));
 
-        static::assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
     }
 
     #[Test]
     public function to_tree(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         /** @var Category $node1 */
-        $node1 = static::model(['title' => 'node 1']);
+        $node1 = $this->model(['title' => 'node 1']);
         $node1->appendTo($modelRoot)->save();
 
         /** @var Category $node21 */
-        $node21 = static::model(['title' => 'child 2.1']);
+        $node21 = $this->model(['title' => 'child 2.1']);
         $node21->appendTo($node1)->save();
 
         /** @var Category $node31 */
-        $node31 = static::model(['title' => 'child 3.1']);
+        $node31 = $this->model(['title' => 'child 3.1']);
         $node31->appendTo($node21)->save();
 
-        $preQueryCount = count(static::model()->getConnection()->getQueryLog());
+        $preQueryCount = count($this->model()->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         /** @var Collection $collection */
-        $collection = static::model()::all();
+        $collection = $this->model()::all();
 
-        static::assertCount(4, $collection);
+        $this->assertCount(4, $collection);
 
         $treeCollection = $collection->toTree(setParentRelations: true);
 
-        static::assertCount(1, $treeCollection);
+        $this->assertCount(1, $treeCollection);
 
         $roots = $treeCollection->getRoots();
-        static::assertCount(1, $roots);
+        $this->assertCount(1, $roots);
 
         /** @var Category $root */
         $root = $roots->first();
-        static::assertNull($root->parent);
-        static::assertCount(1, $root->children);
+        $this->assertNull($root->parent);
+        $this->assertCount(1, $root->children);
 
         /** @var Category $expNode1 */
         $expNode1 = $root->children->first();
-        static::assertCount(1, $expNode1->children);
-        static::assertTrue($root->isEqualTo($expNode1->parent));
+        $this->assertCount(1, $expNode1->children);
+        $this->assertTrue($root->isEqualTo($expNode1->parent));
 
         /** @var Category $expNode21 */
         $expNode21 = $expNode1->children->first();
-        static::assertCount(1, $expNode21->children);
-        static::assertTrue($expNode1->isEqualTo($expNode21->parent));
+        $this->assertCount(1, $expNode21->children);
+        $this->assertTrue($expNode1->isEqualTo($expNode21->parent));
 
         /** @var Category $expNode31 */
         $expNode31 = $expNode21->children->first();
-        static::assertCount(0, $expNode31->children);
-        static::assertTrue($expNode21->isEqualTo($expNode31->parent));
+        $this->assertCount(0, $expNode31->children);
+        $this->assertTrue($expNode21->isEqualTo($expNode31->parent));
 
-        static::assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
 
-        static::assertEquals(4, $treeCollection->totalCount());
+        $this->assertEquals(4, $treeCollection->totalCount());
     }
 
     #[Test]
     public function fill_missing_intermediate_nodes(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         /** @var Category $node1 */
-        $node1 = static::model(['title' => 'node 1']);
+        $node1 = $this->model(['title' => 'node 1']);
         $node1->appendTo($modelRoot)->save();
 
         /** @var Category $node21 */
-        $node21 = static::model(['title' => 'child 2.1']);
+        $node21 = $this->model(['title' => 'child 2.1']);
         $node21->appendTo($node1)->save();
 
         /** @var Category $node31 */
-        $node31 = static::model(['title' => 'child 3.1']);
+        $node31 = $this->model(['title' => 'child 3.1']);
         $node31->appendTo($node21)->save();
 
         /** @var Collection $collection */
@@ -158,26 +158,26 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
 
         $collection->fillMissingIntermediateNodes();
 
-        static::assertCount(4, $collection);
+        $this->assertCount(4, $collection);
     }
 
     #[Test]
     public function to_breadcrumbs(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         /** @var Category $node1 */
-        $node1 = static::model(['title' => 'node 1']);
+        $node1 = $this->model(['title' => 'node 1']);
         $node1->appendTo($modelRoot)->save();
 
         /** @var Category $node21 */
-        $node21 = static::model(['title' => 'child 2.1']);
+        $node21 = $this->model(['title' => 'child 2.1']);
         $node21->appendTo($node1)->save();
 
         /** @var Category $node31 */
-        $node31 = static::model(['title' => 'child 3.1']);
+        $node31 = $this->model(['title' => 'child 3.1']);
         $node31->appendTo($node21)->save();
 
         /** @var Collection $collection */
@@ -185,31 +185,31 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
 
         $treeCollection = $collection->toBreadcrumbs();
 
-        static::assertCount(1, $treeCollection);
+        $this->assertCount(1, $treeCollection);
 
         $roots = $treeCollection->getRoots();
-        static::assertCount(1, $roots);
+        $this->assertCount(1, $roots);
 
         /** @var Category $root */
         $root = $roots->first();
-        static::assertNull($root->parent);
-        static::assertCount(1, $root->children);
+        $this->assertNull($root->parent);
+        $this->assertCount(1, $root->children);
 
         /** @var Category $expNode1 */
         $expNode1 = $root->children->first();
-        static::assertCount(1, $expNode1->children);
-        static::assertTrue($root->isEqualTo($expNode1->parent));
+        $this->assertCount(1, $expNode1->children);
+        $this->assertTrue($root->isEqualTo($expNode1->parent));
 
         /** @var Category $expNode21 */
         $expNode21 = $expNode1->children->first();
-        static::assertCount(1, $expNode21->children);
-        static::assertTrue($expNode1->isEqualTo($expNode21->parent));
+        $this->assertCount(1, $expNode21->children);
+        $this->assertTrue($expNode1->isEqualTo($expNode21->parent));
 
         /** @var Category $expNode31 */
         $expNode31 = $expNode21->children->first();
-        static::assertCount(0, $expNode31->children);
-        static::assertTrue($expNode21->isEqualTo($expNode31->parent));
+        $this->assertCount(0, $expNode31->children);
+        $this->assertTrue($expNode21->isEqualTo($expNode31->parent));
 
-        static::assertEquals(4, $treeCollection->totalCount());
+        $this->assertEquals(4, $treeCollection->totalCount());
     }
 }

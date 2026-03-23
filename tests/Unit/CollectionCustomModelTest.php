@@ -20,69 +20,69 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
             2,
             3,
         ];
-        static::makeTree(null, ...$childrenTree);
+        $this->makeTree(null, ...$childrenTree);
 
-        static::assertEquals(56, static::sum($childrenTree));
-        static::assertCount(static::sum($childrenTree), CustomModel::all());
+        $this->assertEquals(56, $this->sum($childrenTree));
+        $this->assertCount($this->sum($childrenTree), CustomModel::all());
 
         $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
 
         /** @var CustomModel $root */
         $roots = CustomModel::root()->get();
 
-        static::assertCount(2, $roots);
+        $this->assertCount(2, $roots);
         $root1 = $roots->first();
         $root2 = $roots->last();
 
         $collection1 = CustomModel::byTree($root1->treeValue())->get();
         $collection2 = CustomModel::byTree($root2->treeValue())->get();
 
-        static::assertCount(28, $collection1);
-        static::assertCount(28, $collection2);
+        $this->assertCount(28, $collection1);
+        $this->assertCount(28, $collection2);
 
-        static::assertCount($preQueryCount += 3, $root1->getConnection()->getQueryLog());
+        $this->assertCount($preQueryCount += 3, $root1->getConnection()->getQueryLog());
 
         foreach ($roots as $root) {
-            static::assertEquals(CustomModel::TREE_ID, $root->treeAttribute()->columnName());
-            static::assertEquals(CustomModel::PARENT_ID, $root->parentAttribute()->columnName());
-            static::assertEquals('custom_left', $root->leftAttribute()->columnName());
-            static::assertEquals('custom_right', $root->rightAttribute()->columnName());
-            static::assertEquals('custom_level', $root->levelAttribute()->columnName());
+            $this->assertEquals(CustomModel::TREE_ID, $root->treeAttribute()->columnName());
+            $this->assertEquals(CustomModel::PARENT_ID, $root->parentAttribute()->columnName());
+            $this->assertEquals('custom_left', $root->leftAttribute()->columnName());
+            $this->assertEquals('custom_right', $root->rightAttribute()->columnName());
+            $this->assertEquals('custom_level', $root->levelAttribute()->columnName());
 
             $collection = CustomModel::byTree($root->treeValue())->get();
             $preQueryCount++;
-            static::assertCount($preQueryCount, $root->getConnection()->getQueryLog());
+            $this->assertCount($preQueryCount, $root->getConnection()->getQueryLog());
             $collection->linkNodes();
 
             $collectionRoot = $collection->where($root->parentAttribute()->columnName(), '=', null)->first();
             $collectionRoot2 = $collection->getRoots()->first();
-            static::assertEquals($collectionRoot, $collectionRoot2);
+            $this->assertEquals($collectionRoot, $collectionRoot2);
 
-            static::assertCount($preQueryCount, $root->getConnection()->getQueryLog());
+            $this->assertCount($preQueryCount, $root->getConnection()->getQueryLog());
 
-            static::assertCount(3, $collectionRoot->children);
-            static::assertNull($collectionRoot->parent);
+            $this->assertCount(3, $collectionRoot->children);
+            $this->assertNull($collectionRoot->parent);
 
-            static::assertCount($preQueryCount, $root->getConnection()->getQueryLog());
+            $this->assertCount($preQueryCount, $root->getConnection()->getQueryLog());
 
             foreach ($collectionRoot->children as $children1) {
-                static::assertCount(2, $children1->children);
-                static::assertEquals($collectionRoot->id, $children1->parent->id);
+                $this->assertCount(2, $children1->children);
+                $this->assertEquals($collectionRoot->id, $children1->parent->id);
 
                 foreach ($children1->children as $children2) {
-                    static::assertCount(3, $children2->children);
-                    static::assertEquals($children1->id, $children2->parent->id);
+                    $this->assertCount(3, $children2->children);
+                    $this->assertEquals($children1->id, $children2->parent->id);
                 }
             }
         }
 
-        static::assertCount($preQueryCount, $root->getConnection()->getQueryLog());
+        $this->assertCount($preQueryCount, $root->getConnection()->getQueryLog());
     }
 
     #[Test]
     public function to_link_nodes(): void
     {
-        static::makeTree(null, 2, 3, 2, 3);
+        $this->makeTree(null, 2, 3, 2, 3);
 
         $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 2;
@@ -93,18 +93,18 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
         /** @var CustomModel $root */
         $root = $collection->getRoots()->first();
 
-        static::assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $root->getConnection()->getQueryLog());
 
-        static::assertCount(3, $root->children);
-        static::assertNull($root->parent);
-        static::assertCount($expectedQueryCount + 1, $root->getConnection()->getQueryLog());
+        $this->assertCount(3, $root->children);
+        $this->assertNull($root->parent);
+        $this->assertCount($expectedQueryCount + 1, $root->getConnection()->getQueryLog());
 
         foreach ($root->children as $children1) {
-            static::assertCount(2, $children1->children);
-            static::assertEquals($root->id, $children1->parent->id);
+            $this->assertCount(2, $children1->children);
+            $this->assertEquals($root->id, $children1->parent->id);
         }
 
-        static::assertCount($expectedQueryCount + 7, $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount + 7, $root->getConnection()->getQueryLog());
     }
 
     #[Test]
@@ -116,7 +116,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
             2,
             3,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 2;
@@ -124,21 +124,21 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
         $root = CustomModel::root()->first();
         $list = CustomModel::byTree($root->treeValue())->get();
 
-        static::assertCount(static::sum($childrenNodesMap) / 2, $list);
+        $this->assertCount($this->sum($childrenNodesMap) / 2, $list);
 
         /** @var CustomModel $root */
         $root = $list->getRoots()->first();
         $tree = $list->toTree($root);
 
-        static::assertCount(3, $tree);
-        static::assertNull($root->parent);
+        $this->assertCount(3, $tree);
+        $this->assertNull($root->parent);
 
         foreach ($root->children as $children1) {
-            static::assertCount(2, $children1->children);
-            static::assertEquals($root->id, $children1->parent->id);
+            $this->assertCount(2, $children1->children);
+            $this->assertEquals($root->id, $children1->parent->id);
         }
 
-        static::assertCount($expectedQueryCount + $root->children->count(), $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount + $root->children->count(), $root->getConnection()->getQueryLog());
     }
 
     #[Test]
@@ -148,22 +148,22 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
             2,
             3,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         $list = CustomModel::all();
-        static::assertCount(static::sum($childrenNodesMap), $list);
+        $this->assertCount($this->sum($childrenNodesMap), $list);
 
         $tree = $list->toTree();
-        static::assertCount(2, $tree);
+        $this->assertCount(2, $tree);
 
         foreach ($tree as $page) {
-            static::assertCount(3, $page['children']);
+            $this->assertCount(3, $page['children']);
         }
 
-        static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
     }
 
     #[Test]
@@ -175,16 +175,16 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
             1,
             2,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         foreach ($childrenNodesMap as $level => $childrenCount) {
             $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
             $expectedQueryCount = $preQueryCount + 1;
 
             $list = CustomModel::toLevel($level)->get();
-            static::assertCount(static::sum($childrenNodesMap, $level), $list);
+            $this->assertCount($this->sum($childrenNodesMap, $level), $list);
 
-            static::assertEmpty(
+            $this->assertEmpty(
                 $list->filter(
                     function ($item) use ($level) {
                         return $item->levelValue() > $level;
@@ -192,8 +192,8 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
                 )
             );
 
-            static::assertCount(
-                static::sum($childrenNodesMap, $level),
+            $this->assertCount(
+                $this->sum($childrenNodesMap, $level),
                 $list->filter(
                     function ($item) use ($level) {
                         return $item->levelValue() <= $level;
@@ -203,8 +203,8 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
 
             $tree = $list->toTree();
 
-            static::assertCount(2, $tree);
-            static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+            $this->assertCount(2, $tree);
+            $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
         }
     }
 
@@ -216,44 +216,44 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
             3,
             2,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         $preQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         $list = CustomModel::all();
 
-        static::assertCount(static::sum($childrenNodesMap), $list);
+        $this->assertCount($this->sum($childrenNodesMap), $list);
 
         $tree = $list->toTree()->toArray();
 
-        static::assertCount(5, $tree);
+        $this->assertCount(5, $tree);
 
         foreach ($tree as $pages) {
-            static::assertCount(3, $pages['children']);
+            $this->assertCount(3, $pages['children']);
 
             foreach ($pages['children'] as $page) {
-                static::assertCount(2, $page['children']);
+                $this->assertCount(2, $page['children']);
             }
         }
 
-        static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
     }
 
     #[Test]
     public function get_roots(): void
     {
-        static::makeTree(null, 6, 1, 2, 1);
+        $this->makeTree(null, 6, 1, 2, 1);
 
         $list = CustomModel::all();
         $expectedQueryCount = count((new CustomModel())->getConnection()->getQueryLog());
 
-        static::assertCount(36, $list);
+        $this->assertCount(36, $list);
 
         $roots = $list->getRoots();
 
-        static::assertCount(6, $roots);
+        $this->assertCount(6, $roots);
 
-        static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
     }
 }

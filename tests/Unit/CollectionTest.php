@@ -20,28 +20,28 @@ class CollectionTest extends AbstractUnitTestCase
             2,
             3,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         $preQueryCount = count((new MultiCategory())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         $list = MultiCategory::byTree(1)->get();
 
-        static::assertCount(static::sum($childrenNodesMap) / 2, $list);
+        $this->assertCount($this->sum($childrenNodesMap) / 2, $list);
 
         /** @var MultiCategory $root */
         $root = $list->where('parent_id', '=', null)->first();
         $tree = $list->toTree($root);
 
-        static::assertCount(3, $tree);
-        static::assertNull($root->parent);
+        $this->assertCount(3, $tree);
+        $this->assertNull($root->parent);
 
         foreach ($root->children as $children1) {
-            static::assertCount(2, $children1->children);
-            static::assertEquals($root->id, $children1->parent->id);
+            $this->assertCount(2, $children1->children);
+            $this->assertEquals($root->id, $children1->parent->id);
         }
 
-        static::assertCount($expectedQueryCount + count($root->children), $root->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount + count($root->children), $root->getConnection()->getQueryLog());
     }
 
     #[Test]
@@ -53,16 +53,16 @@ class CollectionTest extends AbstractUnitTestCase
             1,
             2,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         foreach ($childrenNodesMap as $level => $childrenCount) {
             $preQueryCount = count((new MultiCategory())->getConnection()->getQueryLog());
             $expectedQueryCount = $preQueryCount + 1;
 
             $list = MultiCategory::toLevel($level)->get();
-            static::assertCount(static::sum($childrenNodesMap, $level), $list);
+            $this->assertCount($this->sum($childrenNodesMap, $level), $list);
 
-            static::assertEmpty(
+            $this->assertEmpty(
                 $list->filter(
                     function ($item) use ($level) {
                         return $item->levelValue() > $level;
@@ -70,8 +70,8 @@ class CollectionTest extends AbstractUnitTestCase
                 )
             );
 
-            static::assertCount(
-                static::sum($childrenNodesMap, $level),
+            $this->assertCount(
+                $this->sum($childrenNodesMap, $level),
                 $list->filter(
                     function ($item) use ($level) {
                         return $item->levelValue() <= $level;
@@ -80,8 +80,8 @@ class CollectionTest extends AbstractUnitTestCase
             );
 
             $tree = $list->toTree();
-            static::assertCount(2, $tree);
-            static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+            $this->assertCount(2, $tree);
+            $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
         }
     }
 
@@ -93,25 +93,25 @@ class CollectionTest extends AbstractUnitTestCase
             3,
             2,
         ];
-        static::makeTree(null, ...$childrenNodesMap);
+        $this->makeTree(null, ...$childrenNodesMap);
 
         $preQueryCount = count((new MultiCategory())->getConnection()->getQueryLog());
         $expectedQueryCount = $preQueryCount + 1;
 
         $list = MultiCategory::all();
-        static::assertCount(static::sum($childrenNodesMap), $list);
+        $this->assertCount($this->sum($childrenNodesMap), $list);
 
         $tree = $list->toTree()->toArray();
-        static::assertCount(5, $tree);
+        $this->assertCount(5, $tree);
 
         foreach ($tree as $pages) {
-            static::assertCount(3, $pages['children']);
+            $this->assertCount(3, $pages['children']);
 
             foreach ($pages['children'] as $page) {
-                static::assertCount(2, $page['children']);
+                $this->assertCount(2, $page['children']);
             }
         }
 
-        static::assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
+        $this->assertCount($expectedQueryCount, $list->first()->getConnection()->getQueryLog());
     }
 }

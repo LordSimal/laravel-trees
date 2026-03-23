@@ -17,7 +17,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     {
         $this->makeTree(null, 1, 2, 4);
 
-        static::assertEquals(0, Category::fixTree());
+        $this->assertEquals(0, Category::fixTree());
     }
 
     #[Test]
@@ -34,9 +34,9 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $oddness = Category::query()->countErrors('oddness');
 
-        static::assertEquals(1, $oddness);
+        $this->assertEquals(1, $oddness);
         Category::fixTree();
-        static::assertEquals(0, Category::query()->countErrors('oddness'));
+        $this->assertEquals(0, Category::query()->countErrors('oddness'));
     }
 
     #[Test]
@@ -53,9 +53,9 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $oddness = Category::query()->countErrors('oddness');
 
-        static::assertEquals(1, $oddness);
+        $this->assertEquals(1, $oddness);
         Category::fixTree($brokenModel->parent);
-        static::assertEquals(0, Category::query()->countErrors('oddness'));
+        $this->assertEquals(0, Category::query()->countErrors('oddness'));
     }
 
     #[Test]
@@ -72,14 +72,14 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $oddness = Category::query()->countErrors();
 
-        static::assertEquals([
+        $this->assertEquals([
             'oddness' => 0,
             'duplicates' => 2,
             'wrong_parent' => 1,
             'missing_parent' => 0,
         ], $oddness);
         Category::fixTree($brokenModel->parent);
-        static::assertEquals([
+        $this->assertEquals([
             'oddness' => 0,
             'duplicates' => 0,
             'wrong_parent' => 0,
@@ -102,9 +102,9 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $duplicates = Category::query()->countErrors('duplicates');
 
-        static::assertEquals(2, $duplicates);
+        $this->assertEquals(2, $duplicates);
         Category::fixTree();
-        static::assertEquals(0, Category::query()->countErrors('duplicates'));
+        $this->assertEquals(0, Category::query()->countErrors('duplicates'));
     }
 
     #[Test]
@@ -121,9 +121,9 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $wrongParents = Category::query()->countErrors('wrong_parent');
 
-        static::assertEquals(3, $wrongParents);
+        $this->assertEquals(3, $wrongParents);
         Category::fixTree();
-        static::assertEquals(0, Category::query()->countErrors('wrong_parent'));
+        $this->assertEquals(0, Category::query()->countErrors('wrong_parent'));
     }
 
     #[Test]
@@ -140,9 +140,9 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $missingParents = Category::query()->countErrors('missing_parent');
 
-        static::assertEquals(1, $missingParents);
+        $this->assertEquals(1, $missingParents);
         Category::fixTree();
-        static::assertEquals(0, Category::query()->countErrors('missing_parent'));
+        $this->assertEquals(0, Category::query()->countErrors('missing_parent'));
     }
 
     #[Test]
@@ -159,8 +159,8 @@ class FixingTraitTest extends AbstractUnitTestCase
 
         $oddness = Category::query()->countErrors('oddness');
 
-        static::assertEquals(1, $oddness);
+        $this->assertEquals(1, $oddness);
         Category::fixMultiTree();
-        static::assertEquals(0, Category::query()->countErrors('oddness'));
+        $this->assertEquals(0, Category::query()->countErrors('oddness'));
     }
 }

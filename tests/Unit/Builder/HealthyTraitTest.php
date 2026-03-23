@@ -15,10 +15,10 @@ class HealthyTraitTest extends AbstractUnitTestCase
     #[Test]
     public function count_errors(): void
     {
-        static::makeTree(null, 1, 3, 2, 1, 1);
+        $this->makeTree(null, 1, 3, 2, 1, 1);
 
         $data = Category::countErrors();
-        static::assertEquals(
+        $this->assertEquals(
             [
                 'oddness' => 0,
                 'duplicates' => 0,
@@ -29,14 +29,14 @@ class HealthyTraitTest extends AbstractUnitTestCase
         );
 
         $oddness = Category::countErrors('oddness');
-        static::assertEmpty($oddness);
+        $this->assertEmpty($oddness);
     }
 
     #[Test]
     public function is_broken(): void
     {
-        static::makeTree(null, 1, 3, 2, 1, 1);
+        $this->makeTree(null, 1, 3, 2, 1, 1);
 
-        static::assertFalse(Category::isBroken());
+        $this->assertFalse(Category::isBroken());
     }
 }

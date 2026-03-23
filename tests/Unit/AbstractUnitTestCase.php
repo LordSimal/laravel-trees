@@ -151,7 +151,7 @@ abstract class AbstractUnitTestCase extends AbstractTestCase
             ->draw();
     }
 
-    protected static function sum(array $childMap, $level = null): int
+    protected function sum(array $childMap, $level = null): int
     {
         if (! count($childMap)) {
             return 0;

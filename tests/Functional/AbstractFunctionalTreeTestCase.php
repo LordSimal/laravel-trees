@@ -20,16 +20,16 @@ abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
     /**
      * @return class-string<AbstractModel|AbstractMultiModel>
      */
-    abstract protected static function modelClass(): string;
+    abstract protected function modelClass(): string;
 
-    protected static function model(array $attributes = []): Model
+    protected function model(array $attributes = []): Model
     {
-        $modelClass = static::modelClass();
+        $modelClass = $this->modelClass();
 
         return new $modelClass($attributes);
     }
 
-    private static function dbMigrate(): void
+    private function dbMigrate(): void
     {
         /** @var ConnectionInterface $connection */
         $connection = app('db.connection');
@@ -39,7 +39,7 @@ abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
             app('db.connection')->statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         }
 
-        $model = static::model();
+        $model = $this->model();
         $treeBuilder = $model->getTreeBuilder();
 
         $connection->getSchemaBuilder()->create(
@@ -77,6 +77,6 @@ abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        static::dbMigrate();
+        $this->dbMigrate();
     }
 }

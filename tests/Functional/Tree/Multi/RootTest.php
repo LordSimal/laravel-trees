@@ -13,7 +13,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     /**
      * @return class-string<MultiCategory>
      */
-    protected static function modelClass(): string
+    protected function modelClass(): string
     {
         return MultiCategory::class;
     }
@@ -22,76 +22,76 @@ class RootTest extends AbstractFunctionalTreeTestCase
     public function create_root(): void
     {
         /** @var MultiCategory $model */
-        $model = static::model(['title' => 'root node']);
+        $model = $this->model(['title' => 'root node']);
 
         $model->makeRoot()->save();
 
-        static::assertSame(1, $model->id);
-        static::assertTrue($model->isRoot());
+        $this->assertSame(1, $model->id);
+        $this->assertTrue($model->isRoot());
 
-        static::assertNotNull($model->getRoot());
-        static::assertInstanceOf(static::modelClass(), $model->getRoot());
+        $this->assertNotNull($model->getRoot());
+        $this->assertInstanceOf(static::modelClass(), $model->getRoot());
 
-        static::assertEquals($model->id, $model->getRoot()->id);
-        static::assertEquals($model->title, $model->getRoot()->title);
-        static::assertEquals(1, $model->leftValue());
-        static::assertEquals(2, $model->rightValue());
-        static::assertEquals($model->lvl, $model->getRoot()->lvl);
-        static::assertSame(0, $model->getRoot()->lvl);
+        $this->assertEquals($model->id, $model->getRoot()->id);
+        $this->assertEquals($model->title, $model->getRoot()->title);
+        $this->assertEquals(1, $model->leftValue());
+        $this->assertEquals(2, $model->rightValue());
+        $this->assertEquals($model->lvl, $model->getRoot()->lvl);
+        $this->assertSame(0, $model->getRoot()->lvl);
 
-        static::assertEquals($model->tree_id, $model->getRoot()->tree_id);
-        static::assertSame(1, $model->getRoot()->tree_id);
+        $this->assertEquals($model->tree_id, $model->getRoot()->tree_id);
+        $this->assertSame(1, $model->getRoot()->tree_id);
 
-        static::assertEmpty($model->parents());
+        $this->assertEmpty($model->parents());
     }
 
     #[Test]
     public function create_several_root(): void
     {
         /** @var MultiCategory $model */
-        $model = static::model(['title' => 'root 1']);
+        $model = $this->model(['title' => 'root 1']);
         $model->makeRoot()->save();
-        static::assertSame(1, $model->tree_id);
+        $this->assertSame(1, $model->tree_id);
 
-        $model2 = static::model(['title' => 'root 2']);
+        $model2 = $this->model(['title' => 'root 2']);
         $model2->makeRoot()->save();
-        static::assertSame(2, $model2->tree_id);
+        $this->assertSame(2, $model2->tree_id);
     }
 
     #[Test]
     public function create_several_root_without_mark_them_as_root(): void
     {
         /** @var MultiCategory $model */
-        $model = static::model(['title' => 'root 1']);
+        $model = $this->model(['title' => 'root 1']);
         $model->save();
-        static::assertSame(1, $model->tree_id);
-        static::assertEquals(1, $model->leftValue());
-        static::assertEquals(2, $model->rightValue());
-        static::assertEmpty($model->parents());
-        static::assertTrue($model->isLeaf());
+        $this->assertSame(1, $model->tree_id);
+        $this->assertEquals(1, $model->leftValue());
+        $this->assertEquals(2, $model->rightValue());
+        $this->assertEmpty($model->parents());
+        $this->assertTrue($model->isLeaf());
 
-        $model2 = static::model(['title' => 'root 2']);
+        $model2 = $this->model(['title' => 'root 2']);
         $model2->save();
 
-        static::assertSame(2, $model2->tree_id);
-        static::assertEquals(1, $model2->leftValue());
-        static::assertEquals(2, $model2->rightValue());
-        static::assertEmpty($model2->parents());
+        $this->assertSame(2, $model2->tree_id);
+        $this->assertEquals(1, $model2->leftValue());
+        $this->assertEquals(2, $model2->rightValue());
+        $this->assertEmpty($model2->parents());
 
-        static::assertNotEquals($model->tree_id, $model2->tree_id);
-        static::assertTrue($model2->isLeaf());
+        $this->assertNotEquals($model->tree_id, $model2->tree_id);
+        $this->assertTrue($model2->isLeaf());
     }
 
     #[Test]
     public function receive_roots(): void
     {
         /** @var MultiCategory $root */
-        $root = static::model(['title' => 'root 1']);
+        $root = $this->model(['title' => 'root 1']);
         $root->saveAsRoot();
-        static::model(['title' => 'child 2.1'])->prependTo($root)->save();
+        $this->model(['title' => 'child 2.1'])->prependTo($root)->save();
 
-        static::model(['title' => 'root 2'])->saveAsRoot();
+        $this->model(['title' => 'root 2'])->saveAsRoot();
 
-        static::assertEquals(2, MultiCategory::root()->count());
+        $this->assertEquals(2, MultiCategory::root()->count());
     }
 }

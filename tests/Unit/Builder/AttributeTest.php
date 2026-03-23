@@ -17,23 +17,23 @@ class AttributeTest extends AbstractTestCase
     {
         $attr = new Attribute(AttributeType::Left);
 
-        static::assertEquals(AttributeType::Left, $attr->name());
-        static::assertEquals(AttributeType::Left->value, $attr->name()->value);
-        static::assertEquals(AttributeType::Left->value, (string) $attr);
-        static::assertNull($attr->default());
-        static::assertEquals(AttributeType::Left->value, $attr->columnName());
-        static::assertFalse($attr->isNullable());
-        static::assertEquals(FieldType::UnsignedInteger, $attr->type());
+        $this->assertEquals(AttributeType::Left, $attr->name());
+        $this->assertEquals(AttributeType::Left->value, $attr->name()->value);
+        $this->assertEquals(AttributeType::Left->value, (string) $attr);
+        $this->assertNull($attr->default());
+        $this->assertEquals(AttributeType::Left->value, $attr->columnName());
+        $this->assertFalse($attr->isNullable());
+        $this->assertEquals(FieldType::UnsignedInteger, $attr->type());
     }
 
     #[Test]
     public function change_column_name(): void
     {
         $attr = new Attribute(AttributeType::Left);
-        static::assertEquals(AttributeType::Left->value, $attr->columnName());
+        $this->assertEquals(AttributeType::Left->value, $attr->columnName());
 
         $attr->setColumnName('test');
-        static::assertEquals('test', $attr->columnName());
+        $this->assertEquals('test', $attr->columnName());
     }
 
     #[Test]
@@ -41,9 +41,9 @@ class AttributeTest extends AbstractTestCase
     {
         $attr = new Attribute(AttributeType::Left);
 
-        static::assertNull($attr->default());
+        $this->assertNull($attr->default());
 
         $attr->setDefault(0);
-        static::assertEquals(0, $attr->default());
+        $this->assertEquals(0, $attr->default());
     }
 }

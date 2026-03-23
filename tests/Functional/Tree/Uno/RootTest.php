@@ -15,7 +15,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     /**
      * @return class-string<Category>
      */
-    protected static function modelClass(): string
+    protected function modelClass(): string
     {
         return Category::class;
     }
@@ -24,44 +24,44 @@ class RootTest extends AbstractFunctionalTreeTestCase
     public function create_root(): void
     {
         /** @var Category $model */
-        $model = static::model(['title' => 'root node']);
+        $model = $this->model(['title' => 'root node']);
 
         $model->makeRoot()->save();
 
-        static::assertSame(1, $model->id);
-        static::assertTrue($model->isRoot());
+        $this->assertSame(1, $model->id);
+        $this->assertTrue($model->isRoot());
 
-        static::assertNotNull($model->getRoot());
-        static::assertInstanceOf(static::modelClass(), $model->getRoot());
+        $this->assertNotNull($model->getRoot());
+        $this->assertInstanceOf(static::modelClass(), $model->getRoot());
 
-        static::assertEquals($model->id, $model->getRoot()->id);
-        static::assertEquals($model->title, $model->getRoot()->title);
-        static::assertEquals(1, $model->leftValue());
-        static::assertEquals(2, $model->rightValue());
-        static::assertEquals($model->lvl, $model->getRoot()->lvl);
-        static::assertSame(0, $model->getRoot()->lvl);
+        $this->assertEquals($model->id, $model->getRoot()->id);
+        $this->assertEquals($model->title, $model->getRoot()->title);
+        $this->assertEquals(1, $model->leftValue());
+        $this->assertEquals(2, $model->rightValue());
+        $this->assertEquals($model->lvl, $model->getRoot()->lvl);
+        $this->assertSame(0, $model->getRoot()->lvl);
 
-        static::assertEmpty($model->parents());
-        static::assertTrue($model->isLeaf());
+        $this->assertEmpty($model->parents());
+        $this->assertTrue($model->isLeaf());
     }
 
     #[Test]
     public function create_several_root(): void
     {
         /** @var Category $model */
-        $model = static::model(['title' => 'root 1']);
+        $model = $this->model(['title' => 'root 1']);
         $model->makeRoot()->save();
 
         $this->expectException(UniqueRootException::class);
 
-        $model = static::model(['title' => 'root 2']);
+        $model = $this->model(['title' => 'root 2']);
         $model->makeRoot()->save();
     }
 
     #[Test]
     public function base_save_exception(): void
     {
-        $model = static::model(['id' => 2, 'title' => 'node']);
+        $model = $this->model(['id' => 2, 'title' => 'node']);
         $this->expectException(NotSupportedException::class);
         $model->save();
     }

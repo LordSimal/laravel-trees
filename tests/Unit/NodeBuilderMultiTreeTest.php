@@ -14,22 +14,22 @@ class NodeBuilderMultiTreeTest extends AbstractUnitTestCase
     #[Test]
     public function by_tree(): void
     {
-        static::makeTree(null, 3, 2, 1);
+        $this->makeTree(null, 3, 2, 1);
 
         $roots = MultiCategory::root()->get();
 
         foreach ($roots as $node) {
             $nodesRootCheck = MultiCategory::root()->byTree($node->treeValue())->get();
-            static::assertCount(1, $nodesRootCheck);
+            $this->assertCount(1, $nodesRootCheck);
             $nodeRootCheck = $nodesRootCheck->first();
-            static::assertInstanceOf(MultiCategory::class, $nodeRootCheck);
-            static::assertEquals($node->id, $nodeRootCheck->id);
+            $this->assertInstanceOf(MultiCategory::class, $nodeRootCheck);
+            $this->assertEquals($node->id, $nodeRootCheck->id);
 
             $nodesCheck = MultiCategory::byTree($node->treeValue())->get();
-            static::assertCount(5, $nodesCheck);
+            $this->assertCount(5, $nodesCheck);
             $treeId = $node->treeValue();
 
-            static::assertCount(
+            $this->assertCount(
                 5,
                 $nodesCheck->map->tree_id->filter(fn ($item) => $item === $treeId)
             );

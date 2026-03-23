@@ -25,12 +25,12 @@ class BuilderTest extends AbstractTestCase
                 new Attribute(AttributeType::Parent),
             );
 
-        static::assertEquals(AttributeType::Left->value, (string) $builder->left());
-        static::assertEquals(AttributeType::Right->value, (string) $builder->right());
-        static::assertEquals(AttributeType::Parent->value, (string) $builder->parent());
-        static::assertEquals(AttributeType::Level->value, (string) $builder->level());
+        $this->assertEquals(AttributeType::Left->value, (string) $builder->left());
+        $this->assertEquals(AttributeType::Right->value, (string) $builder->right());
+        $this->assertEquals(AttributeType::Parent->value, (string) $builder->parent());
+        $this->assertEquals(AttributeType::Level->value, (string) $builder->level());
 
-        static::assertEquals(
+        $this->assertEquals(
             [
                 AttributeType::Left->value,
                 AttributeType::Right->value,
@@ -45,13 +45,13 @@ class BuilderTest extends AbstractTestCase
     public function create_builder_for_multi_tree(): void
     {
         $builder = Builder::defaultMulti();
-        static::assertNotNull($builder->tree());
+        $this->assertNotNull($builder->tree());
 
-        static::assertEquals(AttributeType::Right->value, (string) $builder->right());
-        static::assertEquals(AttributeType::Parent->value, (string) $builder->parent());
-        static::assertEquals(AttributeType::Level->value, (string) $builder->level());
+        $this->assertEquals(AttributeType::Right->value, (string) $builder->right());
+        $this->assertEquals(AttributeType::Parent->value, (string) $builder->parent());
+        $this->assertEquals(AttributeType::Level->value, (string) $builder->level());
 
-        static::assertEquals(
+        $this->assertEquals(
             [
                 AttributeType::Left->value,
                 AttributeType::Right->value,
@@ -69,11 +69,11 @@ class BuilderTest extends AbstractTestCase
         $builder = Builder::default();
         $config = $builder->build(new Category());
 
-        static::assertEquals(AttributeType::Left->value, (string) $config->left);
-        static::assertEquals(AttributeType::Right->value, (string) $config->right);
-        static::assertEquals(AttributeType::Parent->value, (string) $config->parent);
-        static::assertEquals(AttributeType::Level->value, (string) $config->level);
-        static::assertNull($config->tree);
+        $this->assertEquals(AttributeType::Left->value, (string) $config->left);
+        $this->assertEquals(AttributeType::Right->value, (string) $config->right);
+        $this->assertEquals(AttributeType::Parent->value, (string) $config->parent);
+        $this->assertEquals(AttributeType::Level->value, (string) $config->level);
+        $this->assertNull($config->tree);
     }
 
     #[Test]
@@ -82,10 +82,10 @@ class BuilderTest extends AbstractTestCase
         $builder = Builder::defaultMulti();
         $config = $builder->build(new Category());
 
-        static::assertEquals(AttributeType::Left->value, (string) $config->left);
-        static::assertEquals(AttributeType::Right->value, (string) $config->right);
-        static::assertEquals(AttributeType::Parent->value, (string) $config->parent);
-        static::assertEquals(AttributeType::Level->value, (string) $config->level);
-        static::assertEquals(AttributeType::Tree->value, (string) $config->tree);
+        $this->assertEquals(AttributeType::Left->value, (string) $config->left);
+        $this->assertEquals(AttributeType::Right->value, (string) $config->right);
+        $this->assertEquals(AttributeType::Parent->value, (string) $config->parent);
+        $this->assertEquals(AttributeType::Level->value, (string) $config->level);
+        $this->assertEquals(AttributeType::Tree->value, (string) $config->tree);
     }
 }

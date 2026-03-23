@@ -14,7 +14,7 @@ class TableTest extends AbstractFunctionalTreeTestCase
     /**
      * @return class-string<Category>
      */
-    protected static function modelClass(): string
+    protected function modelClass(): string
     {
         return Category::class;
     }
@@ -23,23 +23,23 @@ class TableTest extends AbstractFunctionalTreeTestCase
     public function draw_from_model(): void
     {
         /** @var Category $root */
-        $root = static::model(['title' => 'root node']);
+        $root = $this->model(['title' => 'root node']);
         $root->makeRoot()->save();
 
         /** @var Category $node1 */
-        $node1 = static::model(['title' => 'child 1']);
+        $node1 = $this->model(['title' => 'child 1']);
         $node1->appendTo($root)->save();
 
         /** @var Category $node11 */
-        $node11 = static::model(['title' => 'child 1.1']);
+        $node11 = $this->model(['title' => 'child 1.1']);
         $node11->appendTo($node1)->save();
 
         /** @var Category $node111 */
-        $node111 = static::model(['title' => 'child 1.1.1']);
+        $node111 = $this->model(['title' => 'child 1.1.1']);
         $node111->appendTo($node11)->save();
 
         /** @var Category $node12 */
-        $node12 = static::model(['title' => 'child 1.2']);
+        $node12 = $this->model(['title' => 'child 1.2']);
         $node12->appendTo($node1)->save();
 
         $output = new BufferedConsoleOutput();
@@ -51,7 +51,7 @@ class TableTest extends AbstractFunctionalTreeTestCase
 
         $str = $output->fetch();
 
-        self::assertNotEmpty($str);
+        $this->assertNotEmpty($str);
     }
 
     //    #[Test]
@@ -81,7 +81,7 @@ class TableTest extends AbstractFunctionalTreeTestCase
     //
     //        $str = $output->fetch();
     //
-    //        self::assertNotEmpty($str);
+    //        $this->assertNotEmpty($str);
     //    }
 
     //    #[Test]
@@ -109,6 +109,6 @@ class TableTest extends AbstractFunctionalTreeTestCase
     //
     //        $str = $output->fetch();
     //
-    //        self::assertNotEmpty($str);
+    //        $this->assertNotEmpty($str);
     //    }
 }

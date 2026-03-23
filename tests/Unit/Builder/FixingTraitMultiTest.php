@@ -18,7 +18,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
         $this->makeTree(null, 1, 2, 4);
         $this->makeTree(null, 1, 2, 4);
 
-        static::assertEquals(
+        $this->assertEquals(
             [
                 1 => 0,
                 2 => 0,
@@ -42,9 +42,9 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
 
         $oddness = MultiCategory::query()->countErrors('oddness');
 
-        static::assertEquals(1, $oddness);
+        $this->assertEquals(1, $oddness);
         MultiCategory::fixMultiTree();
-        static::assertEquals(0, MultiCategory::query()->countErrors('oddness'));
+        $this->assertEquals(0, MultiCategory::query()->countErrors('oddness'));
     }
 
     #[Test]
@@ -63,9 +63,9 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
 
         $duplicates = MultiCategory::query()->countErrors('duplicates');
 
-        static::assertEquals(2, $duplicates);
+        $this->assertEquals(2, $duplicates);
         MultiCategory::fixMultiTree();
-        static::assertEquals(0, MultiCategory::query()->countErrors('duplicates'));
+        $this->assertEquals(0, MultiCategory::query()->countErrors('duplicates'));
     }
 
     #[Test]
@@ -83,9 +83,9 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
 
         $wrongParents = MultiCategory::query()->countErrors('wrong_parent');
 
-        static::assertEquals(3, $wrongParents);
+        $this->assertEquals(3, $wrongParents);
         MultiCategory::fixTree();
-        static::assertEquals(0, MultiCategory::query()->countErrors('wrong_parent'));
+        $this->assertEquals(0, MultiCategory::query()->countErrors('wrong_parent'));
     }
 
     #[Test]
@@ -103,8 +103,8 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
 
         $missingParents = MultiCategory::query()->countErrors('missing_parent');
 
-        static::assertEquals(1, $missingParents);
+        $this->assertEquals(1, $missingParents);
         MultiCategory::fixTree();
-        static::assertEquals(0, MultiCategory::query()->countErrors('missing_parent'));
+        $this->assertEquals(0, MultiCategory::query()->countErrors('missing_parent'));
     }
 }

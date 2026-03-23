@@ -13,7 +13,7 @@ class NodeTest extends AbstractFunctionalTreeTestCase
     /**
      * @return class-string<Category>
      */
-    protected static function modelClass(): string
+    protected function modelClass(): string
     {
         return Category::class;
     }
@@ -22,51 +22,51 @@ class NodeTest extends AbstractFunctionalTreeTestCase
     public function get_bounds(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
-        static::assertIsArray($modelRoot->getBounds());
-        static::assertCount(4, $modelRoot->getBounds());
-        static::assertEquals(1, $modelRoot->getBounds()[0]);
-        static::assertEquals(2, $modelRoot->getBounds()[1]);
-        static::assertEquals(0, $modelRoot->getBounds()[2]);
-        static::assertEquals(null, $modelRoot->getBounds()[3]);
+        $this->assertIsArray($modelRoot->getBounds());
+        $this->assertCount(4, $modelRoot->getBounds());
+        $this->assertEquals(1, $modelRoot->getBounds()[0]);
+        $this->assertEquals(2, $modelRoot->getBounds()[1]);
+        $this->assertEquals(0, $modelRoot->getBounds()[2]);
+        $this->assertEquals(null, $modelRoot->getBounds()[3]);
     }
 
     #[Test]
     public function get_node_bounds_by_model(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         $data = $modelRoot->getNodeBounds($modelRoot);
 
-        static::assertIsArray($data);
-        static::assertCount(4, $data);
+        $this->assertIsArray($data);
+        $this->assertCount(4, $data);
     }
 
     #[Test]
     public function get_node_bounds_by_id(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         $data = $modelRoot->getNodeBounds($modelRoot->getKey());
 
-        static::assertIsArray($data);
-        static::assertCount(4, $data);
+        $this->assertIsArray($data);
+        $this->assertCount(4, $data);
     }
 
     #[Test]
     public function get_node_data(): void
     {
         /** @var Category $modelRoot */
-        $modelRoot = static::model(['title' => 'root node']);
+        $modelRoot = $this->model(['title' => 'root node']);
         $modelRoot->makeRoot()->save();
 
         $data = $modelRoot->getNodeData($modelRoot->id);
-        static::assertEquals(['lft' => 1, 'rgt' => 2, 'lvl' => 0, 'parent_id' => null], $data);
+        $this->assertEquals(['lft' => 1, 'rgt' => 2, 'lvl' => 0, 'parent_id' => null], $data);
     }
 }

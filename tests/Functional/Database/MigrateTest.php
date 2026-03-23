@@ -30,10 +30,10 @@ class MigrateTest extends AbstractTestCase
 
         $expectedColumns = $builder->columnsNames();
 
-        static::assertCount(count($expectedColumns), $table->getColumns());
+        $this->assertCount(count($expectedColumns), $table->getColumns());
 
         foreach ($table->getColumns() as $column) {
-            static::assertContains($column->getAttributes()['name'], $expectedColumns);
+            $this->assertContains($column->getAttributes()['name'], $expectedColumns);
         }
     }
 
@@ -47,23 +47,23 @@ class MigrateTest extends AbstractTestCase
 
         $expectedColumns = $builder->columnsNames();
 
-        static::assertCount(count($expectedColumns), $table->getColumns());
+        $this->assertCount(count($expectedColumns), $table->getColumns());
 
         foreach ($table->getColumns() as $column) {
-            static::assertContains($column->getAttributes()['name'], $expectedColumns);
+            $this->assertContains($column->getAttributes()['name'], $expectedColumns);
 
             if ($column->getAttributes()['name'] === $builder->tree()->columnName()) {
-                static::assertEquals('integer', $column->getAttributes()['type']);
-                static::assertFalse($column->getAttributes()['nullable']);
-                static::assertTrue($column->getAttributes()['unsigned']);
-                static::assertNull($column->getAttributes()['default']);
+                $this->assertEquals('integer', $column->getAttributes()['type']);
+                $this->assertFalse($column->getAttributes()['nullable']);
+                $this->assertTrue($column->getAttributes()['unsigned']);
+                $this->assertNull($column->getAttributes()['default']);
             }
 
             if ($column->getAttributes()['name'] === $builder->parent()->columnName()) {
-                static::assertEquals('integer', $column->getAttributes()['type']);
-                static::assertTrue($column->getAttributes()['nullable']);
-                static::assertTrue($column->getAttributes()['unsigned']);
-                static::assertNull($column->getAttributes()['default']);
+                $this->assertEquals('integer', $column->getAttributes()['type']);
+                $this->assertTrue($column->getAttributes()['nullable']);
+                $this->assertTrue($column->getAttributes()['unsigned']);
+                $this->assertNull($column->getAttributes()['default']);
             }
         }
     }
@@ -79,23 +79,23 @@ class MigrateTest extends AbstractTestCase
 
         $expectedColumns = $builder->columnsNames();
 
-        static::assertCount(count($expectedColumns), $table->getColumns());
+        $this->assertCount(count($expectedColumns), $table->getColumns());
 
         foreach ($table->getColumns() as $column) {
-            static::assertContains($column->getAttributes()['name'], $expectedColumns);
+            $this->assertContains($column->getAttributes()['name'], $expectedColumns);
 
             if ($column->getAttributes()['name'] === $builder->tree()->columnName()) {
-                static::assertEquals('tid', $column->getAttributes()['name']);
-                static::assertEquals('uuid', $column->getAttributes()['type']);
-                static::assertFalse($column->getAttributes()['nullable']);
-                static::assertNull($column->getAttributes()['default']);
+                $this->assertEquals('tid', $column->getAttributes()['name']);
+                $this->assertEquals('uuid', $column->getAttributes()['type']);
+                $this->assertFalse($column->getAttributes()['nullable']);
+                $this->assertNull($column->getAttributes()['default']);
             }
 
             if ($column->getAttributes()['name'] === $builder->parent()->columnName()) {
-                static::assertEquals('integer', $column->getAttributes()['type']);
-                static::assertTrue($column->getAttributes()['nullable']);
-                static::assertTrue($column->getAttributes()['unsigned']);
-                static::assertNull($column->getAttributes()['default']);
+                $this->assertEquals('integer', $column->getAttributes()['type']);
+                $this->assertTrue($column->getAttributes()['nullable']);
+                $this->assertTrue($column->getAttributes()['unsigned']);
+                $this->assertNull($column->getAttributes()['default']);
             }
         }
     }
@@ -109,6 +109,6 @@ class MigrateTest extends AbstractTestCase
         (new Migrate($builder, $table))->dropColumns();
 
         $cols = $table->getColumns();
-        static::assertCount(0, $cols);
+        $this->assertCount(0, $cols);
     }
 }
