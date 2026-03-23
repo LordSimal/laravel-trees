@@ -57,7 +57,7 @@ class ChildrenTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function saveChildren(): void
+    public function save_children(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -78,7 +78,7 @@ class ChildrenTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function createAnyChildrenTree(): void
+    public function create_any_children_tree(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

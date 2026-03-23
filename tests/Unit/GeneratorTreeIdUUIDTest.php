@@ -13,7 +13,7 @@ class GeneratorTreeIdUUIDTest extends AbstractUnitTestCase
     protected static string $modelClass = CustomModel::class;
 
     #[Test]
-    public function generateMaxId(): void
+    public function generate_max_id(): void
     {
         $model = (new CustomModel(['title' => 'root']))->makeRoot();
         $model->save();

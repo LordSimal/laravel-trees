@@ -21,7 +21,7 @@ class MigrateTest extends AbstractTestCase
     }
 
     #[Test]
-    public function columnsForUnoTree(): void
+    public function columns_for_uno_tree(): void
     {
         $table = $this->getBlueprint(self::$tableName);
         $builder = Builder::default();
@@ -38,7 +38,7 @@ class MigrateTest extends AbstractTestCase
     }
 
     #[Test]
-    public function columnsForMultiTree(): void
+    public function columns_for_multi_tree(): void
     {
         $table = $this->getBlueprint(self::$tableName);
         $builder = Builder::defaultMulti();
@@ -69,7 +69,7 @@ class MigrateTest extends AbstractTestCase
     }
 
     #[Test]
-    public function columnsForUuidMultiTree(): void
+    public function columns_for_uuid_multi_tree(): void
     {
         $table = $this->getBlueprint(self::$tableName);
         $builder = Builder::defaultMulti();
@@ -101,7 +101,7 @@ class MigrateTest extends AbstractTestCase
     }
 
     #[Test]
-    public function dropColumns(): void
+    public function drop_columns(): void
     {
         $table = $this->getBlueprint(self::$tableName);
         $builder = Builder::default();

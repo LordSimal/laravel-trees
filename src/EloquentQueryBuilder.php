@@ -10,16 +10,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Query\Expression;
 use LordSimal\LaravelTrees\QueryBuilder\Fixing;
 use LordSimal\LaravelTrees\QueryBuilder\Healthy;
+use LordSimal\LaravelTrees\Traits\UseTree;
 
 /**
- * @property TModel|\LordSimal\LaravelTrees\Traits\UseTree $model
+ * @property TModel|UseTree $model
  *
  * @method \LordSimal\LaravelTrees\Collection get($columns = ['*'])
  * @method \LordSimal\LaravelTrees\Collection all($columns = ['*'])
  *
  * @template TModel of \Illuminate\Database\Eloquent\Model
  *
- * @extends \Illuminate\Database\Eloquent\Builder<TModel>
+ * @extends Builder<TModel>
  */
 class EloquentQueryBuilder extends Builder
 {
@@ -131,7 +132,7 @@ class EloquentQueryBuilder extends Builder
     /**
      * Get all descendants (query version)
      *
-     * @return \LordSimal\LaravelTrees\EloquentQueryBuilder
+     * @return EloquentQueryBuilder
      */
     public function whereDescendantOf(
         Model|string|int $id,

@@ -19,7 +19,7 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function linkNodes(): void
+    public function link_nodes(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -76,7 +76,7 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function toTree(): void
+    public function to_tree(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -135,7 +135,7 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function fillMissingIntermediateNodes(): void
+    public function fill_missing_intermediate_nodes(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -162,7 +162,7 @@ class CollectionTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function toBreadcrumbs(): void
+    public function to_breadcrumbs(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

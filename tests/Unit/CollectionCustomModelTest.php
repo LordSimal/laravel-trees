@@ -12,7 +12,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     protected static string $modelClass = CustomModel::class;
 
     #[Test]
-    public function linkNodes(): void
+    public function link_nodes(): void
     {
         $childrenTree = [
             2,
@@ -80,7 +80,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toLinkNodes(): void
+    public function to_link_nodes(): void
     {
         static::makeTree(null, 2, 3, 2, 3);
 
@@ -108,7 +108,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeWithRootNode(): void
+    public function to_tree_with_root_node(): void
     {
         $childrenNodesMap = [
             2,
@@ -142,7 +142,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeWithOutRootNode(): void
+    public function to_tree_with_out_root_node(): void
     {
         $childrenNodesMap = [
             2,
@@ -167,7 +167,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeCustomLevels(): void
+    public function to_tree_custom_levels(): void
     {
         $childrenNodesMap = [
             2,
@@ -209,7 +209,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeArrayMultiRoots(): void
+    public function to_tree_array_multi_roots(): void
     {
         $childrenNodesMap = [
             5,
@@ -241,7 +241,7 @@ class CollectionCustomModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function getRoots(): void
+    public function get_roots(): void
     {
         static::makeTree(null, 6, 1, 2, 1);
 

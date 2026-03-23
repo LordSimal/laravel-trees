@@ -12,7 +12,7 @@ class CollectionTest extends AbstractUnitTestCase
     protected static string $modelClass = MultiCategory::class;
 
     #[Test]
-    public function toTreeWithRootNode(): void
+    public function to_tree_with_root_node(): void
     {
         $childrenNodesMap = [
             2,
@@ -45,7 +45,7 @@ class CollectionTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeCustomLevels(): void
+    public function to_tree_custom_levels(): void
     {
         $childrenNodesMap = [
             2,
@@ -86,7 +86,7 @@ class CollectionTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function toTreeArrayMultiRoots(): void
+    public function to_tree_array_multi_roots(): void
     {
         $childrenNodesMap = [
             5,

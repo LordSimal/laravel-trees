@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace LordSimal\LaravelTrees\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use LordSimal\LaravelTrees\Config\Builder;
 use LordSimal\LaravelTrees\Config\Config;
 use LordSimal\LaravelTrees\Config\FieldType;
+use LordSimal\LaravelTrees\EloquentQueryBuilder;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
@@ -14,14 +16,14 @@ use LordSimal\LaravelTrees\Config\FieldType;
  * @method static static byTree(int|string $treeId)
  * @method static static root()
  *
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
- * @mixin \Illuminate\Database\Eloquent\Model
+ * @mixin EloquentQueryBuilder<static>
+ * @mixin Model
  */
 trait UseTree
 {
     use UseConfigShorter;
 
-    /** @use \LordSimal\LaravelTrees\Traits\UseNestedSet<TModel> */
+    /** @use UseNestedSet<TModel> */
     use UseNestedSet;
 
     private Config $tree_config__;

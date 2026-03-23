@@ -11,3 +11,4 @@ composer.lock
 phpunit.xml.dist
 clover.xml
 coverage
+/test.db

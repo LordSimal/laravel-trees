@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LordSimal\LaravelTrees\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LordSimal\LaravelTrees\Collection;
@@ -11,11 +12,11 @@ use LordSimal\LaravelTrees\EloquentQueryBuilder;
 use LordSimal\LaravelTrees\Relations;
 
 /**
- * @property \LordSimal\LaravelTrees\Collection $ancestors
- * @property \LordSimal\LaravelTrees\Collection $descendants
- * @property \LordSimal\LaravelTrees\Collection $children
- * @property \LordSimal\LaravelTrees\Collection $childrenWithTrashed
- * @property \Illuminate\Database\Eloquent\Model|null $parentWithTrashed
+ * @property Collection $ancestors
+ * @property Collection $descendants
+ * @property Collection $children
+ * @property Collection $childrenWithTrashed
+ * @property Model|null $parentWithTrashed
  */
 trait WithRelations
 {

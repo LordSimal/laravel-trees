@@ -20,7 +20,7 @@ class DeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteRoot(): void
+    public function delete_root(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -32,7 +32,7 @@ class DeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteNode(): void
+    public function delete_node(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -59,7 +59,7 @@ class DeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteNodeWithLineChildren(): void
+    public function delete_node_with_line_children(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -94,7 +94,7 @@ class DeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteNodeWithMoveChildrenToParent(): void
+    public function delete_node_with_move_children_to_parent(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

@@ -7,9 +7,11 @@ namespace LordSimal\LaravelTrees\QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as Query;
 use Illuminate\Database\Query\Expression;
+use LordSimal\LaravelTrees\EloquentQueryBuilder;
+use LordSimal\LaravelTrees\Traits\UseTree;
 
 /**
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait Fixing
 {
@@ -60,7 +62,7 @@ trait Fixing
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model|\LordSimal\LaravelTrees\Traits\UseTree|null  $parent
+     * @param  Model|UseTree|null  $parent
      */
     protected function fixNodes(array &$dictionary, ?Model $parent = null): int
     {
@@ -108,7 +110,7 @@ trait Fixing
 
         $level = $parentId ? $parentLevel + 1 : 0;
 
-        /** @var \Illuminate\Database\Eloquent\Model $model */
+        /** @var Model $model */
         foreach ($dictionary[$parentId] as $model) {
             $lft = $cut;
 

@@ -60,7 +60,7 @@ class UpTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function upMoreOneTime(): void
+    public function up_more_one_time(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

@@ -12,7 +12,7 @@ use LordSimal\LaravelTrees\Traits\UseTree;
  * @property int $lft
  * @property int $rgt
  * @property int $lvl
- * @property \LordSimal\LaravelTrees\Tests\Models\AbstractMultiModel|null $parent
+ * @property AbstractMultiModel|null $parent
  * @property int $tree_id
  * @property int|string $id
  * @property array $path

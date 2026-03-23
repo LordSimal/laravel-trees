@@ -80,7 +80,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendInSubLevel(): void
+    public function append_in_sub_level(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -127,7 +127,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function prependIntoSeveralTree(): void
+    public function prepend_into_several_tree(): void
     {
         for ($i = 0; $i < 3; $i++) {
             /** @var MultiCategory $modelRoot */
@@ -195,7 +195,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function prependSubLevelsIntoSeveralTree(): void
+    public function prepend_sub_levels_into_several_tree(): void
     {
         for ($i = 0; $i < 3; $i++) {
             /** @var MultiCategory $modelRoot */
@@ -246,7 +246,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToSameException(): void
+    public function append_to_same_exception(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -258,7 +258,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToNonExistParentException(): void
+    public function append_to_non_exist_parent_exception(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -271,7 +271,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function moveToSelfChildrenException(): void
+    public function move_to_self_children_exception(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

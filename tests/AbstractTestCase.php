@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LordSimal\LaravelTrees\Tests;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Orchestra\Testbench\TestCase;
 use PDO;
@@ -25,7 +26,7 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
     protected function getEnvironmentSetUp($app): void
     {

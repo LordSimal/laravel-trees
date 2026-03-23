@@ -19,7 +19,7 @@ class NodeTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function getBounds(): void
+    public function get_bounds(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -34,7 +34,7 @@ class NodeTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function getNodeBoundsByModel(): void
+    public function get_node_bounds_by_model(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -47,7 +47,7 @@ class NodeTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function getNodeBoundsById(): void
+    public function get_node_bounds_by_id(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

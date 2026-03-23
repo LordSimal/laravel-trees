@@ -13,7 +13,7 @@ use LordSimal\LaravelTrees\EloquentQueryBuilder;
  * @method static \LordSimal\LaravelTrees\EloquentQueryBuilder query()
  * @method static \LordSimal\LaravelTrees\EloquentQueryBuilder newQuery()
  *
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait WithQueryBuilder
 {
@@ -38,7 +38,7 @@ trait WithQueryBuilder
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model|static  $node
+     * @param  Model|static  $node
      */
     public function isChildOf(Model $node): bool
     {
@@ -112,7 +112,7 @@ trait WithQueryBuilder
     public function getNodeBounds(Model|string|int $node): array
     {
         if (Helper::isTreeNode($node)) {
-            /** @var \LordSimal\LaravelTrees\Traits\UseTree $node */
+            /** @var UseTree $node */
             return $node->getBounds();
         }
 

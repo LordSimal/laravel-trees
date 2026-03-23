@@ -76,7 +76,7 @@ class PrependTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function prependToSameException(): void
+    public function prepend_to_same_exception(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -88,7 +88,7 @@ class PrependTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function prependToNonExistParentException(): void
+    public function prepend_to_non_exist_parent_exception(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node'])->makeRoot();

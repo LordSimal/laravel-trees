@@ -77,7 +77,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendInSubLevel(): void
+    public function append_in_sub_level(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -120,7 +120,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToSameException(): void
+    public function append_to_same_exception(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -132,7 +132,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToNonExistParentException(): void
+    public function append_to_non_exist_parent_exception(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node'])->makeRoot();
@@ -145,7 +145,7 @@ class AppendTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function moveToSelfChildrenException(): void
+    public function move_to_self_children_exception(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node'])->makeRoot();

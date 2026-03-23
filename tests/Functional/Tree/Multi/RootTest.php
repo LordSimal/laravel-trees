@@ -19,7 +19,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function createRoot(): void
+    public function create_root(): void
     {
         /** @var MultiCategory $model */
         $model = static::model(['title' => 'root node']);
@@ -46,7 +46,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function createSeveralRoot(): void
+    public function create_several_root(): void
     {
         /** @var MultiCategory $model */
         $model = static::model(['title' => 'root 1']);
@@ -59,7 +59,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function createSeveralRootWithoutMarkThemAsRoot(): void
+    public function create_several_root_without_mark_them_as_root(): void
     {
         /** @var MultiCategory $model */
         $model = static::model(['title' => 'root 1']);
@@ -83,7 +83,7 @@ class RootTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function receiveRoots(): void
+    public function receive_roots(): void
     {
         /** @var MultiCategory $root */
         $root = static::model(['title' => 'root 1']);

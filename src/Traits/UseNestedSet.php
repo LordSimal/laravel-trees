@@ -7,6 +7,7 @@ namespace LordSimal\LaravelTrees\Traits;
 use Illuminate\Database\Eloquent\Model;
 use LordSimal\LaravelTrees\Config\Helper;
 use LordSimal\LaravelTrees\Config\Operation;
+use LordSimal\LaravelTrees\EloquentQueryBuilder;
 use LordSimal\LaravelTrees\Exceptions\DeletedNodeHasChildrenException;
 use LordSimal\LaravelTrees\Exceptions\DeleteRootException;
 use LordSimal\LaravelTrees\Exceptions\Exception;
@@ -20,23 +21,23 @@ use LordSimal\LaravelTrees\Strategy\ChildrenHandler;
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
  *
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait UseNestedSet
 {
     use DeleteNode;
 
-    /** @use \LordSimal\LaravelTrees\Traits\MoveNode<TModel> */
+    /** @use MoveNode<TModel> */
     use MoveNode;
 
-    /** @use \LordSimal\LaravelTrees\Traits\MoveNode<TModel> */
+    /** @use MoveNode<TModel> */
     use RestoreNode;
 
     use WithQueryBuilder;
     use WithRelations;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model|\LordSimal\LaravelTrees\Traits\UseTree|null
+     * @var Model|UseTree|null
      */
     protected ?Model $node = null;
 
@@ -408,7 +409,7 @@ trait UseNestedSet
     /**
      * @param  int  $to  Left attribute
      *
-     * @throws \LordSimal\LaravelTrees\Exceptions\UniqueRootException|\LordSimal\LaravelTrees\Exceptions\Exception
+     * @throws UniqueRootException|Exception
      */
     protected function insertNode(int $to, int $depth = 0): void
     {

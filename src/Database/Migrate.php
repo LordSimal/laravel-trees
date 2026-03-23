@@ -14,7 +14,7 @@ final class Migrate
     public function __construct(protected Builder $builder, protected Blueprint $table) {}
 
     /**
-     * @throws \LordSimal\LaravelTrees\Exceptions\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public static function columnsFromModel(Blueprint $table, Model|string $model): Builder
     {

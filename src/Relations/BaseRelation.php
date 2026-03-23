@@ -16,7 +16,7 @@ use LordSimal\LaravelTrees\EloquentQueryBuilder;
 /**
  * Class BaseRelation
  *
- * @property \LordSimal\LaravelTrees\EloquentQueryBuilder $query
+ * @property EloquentQueryBuilder $query
  */
 abstract class BaseRelation extends Relation
 {
@@ -71,7 +71,7 @@ abstract class BaseRelation extends Relation
     /**
      * Match the eagerly loaded results to their parents.
      *
-     * @param  array<\Illuminate\Database\Eloquent\Model>  $models
+     * @param  array<Model>  $models
      * @param  string  $relation
      */
     public function match(array $models, EloquentCollection $results, $relation): array

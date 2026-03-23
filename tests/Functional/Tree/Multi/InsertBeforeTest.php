@@ -20,7 +20,7 @@ class InsertBeforeTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function insertBeforeRoot(): void
+    public function insert_before_root(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -34,7 +34,7 @@ class InsertBeforeTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function insertBefore(): void
+    public function insert_before(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

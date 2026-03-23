@@ -81,7 +81,7 @@ class PrependTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function prependIntoSeveralTree(): void
+    public function prepend_into_several_tree(): void
     {
         for ($i = 0; $i < 3; $i++) {
             /** @var MultiCategory $modelRoot */
@@ -145,7 +145,7 @@ class PrependTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToSameException(): void
+    public function append_to_same_exception(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -157,7 +157,7 @@ class PrependTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function appendToNonExistParentException(): void
+    public function append_to_non_exist_parent_exception(): void
     {
         /** @var MultiCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

@@ -72,7 +72,7 @@ trait UseConfigShorter
     }
 
     /**
-     * @phpstan-param \Illuminate\Database\Eloquent\Model|static $model
+     * @phpstan-param Model|static $model
      */
     public function isEqualTo(Model $model): bool
     {

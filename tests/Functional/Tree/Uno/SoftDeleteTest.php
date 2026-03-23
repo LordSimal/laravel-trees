@@ -20,7 +20,7 @@ class SoftDeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteRoot(): void
+    public function delete_root(): void
     {
         /** @var ArchivedCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -32,7 +32,7 @@ class SoftDeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteNode(): void
+    public function delete_node(): void
     {
         /** @var ArchivedCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -67,7 +67,7 @@ class SoftDeleteTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function deleteNodeWithChildren(): void
+    public function delete_node_with_children(): void
     {
         /** @var ArchivedCategory $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

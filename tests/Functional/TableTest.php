@@ -20,7 +20,7 @@ class TableTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function drawFromModel(): void
+    public function draw_from_model(): void
     {
         /** @var Category $root */
         $root = static::model(['title' => 'root node']);

@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace LordSimal\LaravelTrees\Tests\Functional;
 
 use Exception;
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use LordSimal\LaravelTrees\Database\Migrate;
 use LordSimal\LaravelTrees\Tests\AbstractTestCase;
+use LordSimal\LaravelTrees\Tests\Models\AbstractModel;
+use LordSimal\LaravelTrees\Tests\Models\AbstractMultiModel;
 
 abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
 {
     /**
-     * @return class-string<\LordSimal\LaravelTrees\Tests\Models\AbstractModel|\LordSimal\LaravelTrees\Tests\Models\AbstractMultiModel>
+     * @return class-string<AbstractModel|AbstractMultiModel>
      */
     abstract protected static function modelClass(): string;
 
@@ -28,7 +31,7 @@ abstract class AbstractFunctionalTreeTestCase extends AbstractTestCase
 
     private static function dbMigrate(): void
     {
-        /** @var \Illuminate\Database\ConnectionInterface $connection */
+        /** @var ConnectionInterface $connection */
         $connection = app('db.connection');
 
         $connectionDriver = $connection->getDriverName();

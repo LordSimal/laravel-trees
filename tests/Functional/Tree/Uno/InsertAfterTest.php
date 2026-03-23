@@ -20,7 +20,7 @@ class InsertAfterTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function insertAfterRoot(): void
+    public function insert_after_root(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);
@@ -34,7 +34,7 @@ class InsertAfterTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function insertAfter(): void
+    public function insert_after(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

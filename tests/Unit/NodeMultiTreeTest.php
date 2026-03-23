@@ -450,7 +450,7 @@ class NodeMultiTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function moveBetweenRoots(): void
+    public function move_between_roots(): void
     {
         static::makeTree(null, 2);
         $root1 = MultiCategory::find(1);

@@ -46,7 +46,7 @@ class QueryBuilderTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function notRoot(): void
+    public function not_root(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

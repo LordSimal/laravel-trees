@@ -7,12 +7,14 @@ namespace LordSimal\LaravelTrees\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Expression;
 use LordSimal\LaravelTrees\Config\Operation;
+use LordSimal\LaravelTrees\EloquentQueryBuilder;
+use LordSimal\LaravelTrees\Exceptions\Exception;
 use LordSimal\LaravelTrees\Exceptions\TreeNeedValueException;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
  *
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait MoveNode
 {
@@ -132,7 +134,7 @@ trait MoveNode
     }
 
     /**
-     * @throws \LordSimal\LaravelTrees\Exceptions\Exception
+     * @throws Exception
      */
     protected function moveNode(int $to, int $depth = 0): void
     {

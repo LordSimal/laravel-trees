@@ -19,7 +19,7 @@ class MoveTest extends AbstractFunctionalTreeTestCase
     }
 
     #[Test]
-    public function moveAppend(): void
+    public function move_append(): void
     {
         /** @var Category $modelRoot */
         $modelRoot = static::model(['title' => 'root node']);

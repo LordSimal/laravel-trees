@@ -13,7 +13,7 @@ class ModelTest extends AbstractUnitTestCase
     protected static string $modelClass = Category::class;
 
     #[Test]
-    public function makeModel(): void
+    public function make_model(): void
     {
         $model = new Category(['title' => 'Root node']);
 
@@ -23,7 +23,7 @@ class ModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function makeModelMulti(): void
+    public function make_model_multi(): void
     {
         $model = new MultiCategory(['title' => 'Root node']);
 
@@ -33,7 +33,7 @@ class ModelTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function checkCasts(): void
+    public function check_casts(): void
     {
         $model = new Category(['title' => 'Root node']);
         $casts = $model->getCasts();

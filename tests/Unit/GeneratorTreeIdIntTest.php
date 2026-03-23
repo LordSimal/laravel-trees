@@ -13,7 +13,7 @@ class GeneratorTreeIdIntTest extends AbstractUnitTestCase
     protected static string $modelClass = MultiCategory::class;
 
     #[Test]
-    public function generateMaxId(): void
+    public function generate_max_id(): void
     {
         $model = (new MultiCategory(['title' => 'root']))->makeRoot();
         $model->save();

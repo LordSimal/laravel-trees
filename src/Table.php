@@ -138,7 +138,7 @@ final class Table
 
     private function addRow(Collection $tree): void
     {
-        /** @var \Illuminate\Database\Eloquent\Model $node */
+        /** @var Model $node */
         foreach ($tree as $node) {
             $id = $node->getKey();
             $values = $this->getColumnValues($node);

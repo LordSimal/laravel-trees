@@ -77,7 +77,7 @@ class Builder
     }
 
     /**
-     * @return array<\LordSimal\LaravelTrees\Config\Attribute>
+     * @return array<Attribute>
      */
     public static function attributesForUnoTree(): array
     {
@@ -90,7 +90,7 @@ class Builder
     }
 
     /**
-     * @return array<\LordSimal\LaravelTrees\Config\Attribute>
+     * @return array<Attribute>
      */
     public static function attributesForMultiTree(): array
     {
@@ -101,7 +101,7 @@ class Builder
     }
 
     /**
-     * @return array<\LordSimal\LaravelTrees\Config\Attribute>
+     * @return array<Attribute>
      */
     public function columnsList(): array
     {

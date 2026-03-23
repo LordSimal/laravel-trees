@@ -6,11 +6,12 @@ namespace LordSimal\LaravelTrees\Traits;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use LordSimal\LaravelTrees\EloquentQueryBuilder;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
  *
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait RestoreNode
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LordSimal\LaravelTrees\Tests\Unit;
 
 use Exception;
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,7 @@ abstract class AbstractUnitTestCase extends AbstractTestCase
 
     protected function setupDB(): void
     {
-        /** @var \Illuminate\Database\ConnectionInterface $connection */
+        /** @var ConnectionInterface $connection */
         $connection = app('db.connection');
 
         $connectionDriver = $connection->getDriverName();

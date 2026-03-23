@@ -13,7 +13,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     protected static string $modelClass = Category::class;
 
     #[Test]
-    public function notRoot(): void
+    public function not_root(): void
     {
         $root = (new Category(['title' => 'Root node']))->makeRoot();
         $root->save();
@@ -120,7 +120,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function prevSiblings(): void
+    public function prev_siblings(): void
     {
         static::makeTree(null, 1, 3, 4);
 
@@ -143,7 +143,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function nextSiblings(): void
+    public function next_siblings(): void
     {
         static::makeTree(null, 1, 3, 4);
 
@@ -167,7 +167,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function nextSibling(): void
+    public function next_sibling(): void
     {
         static::makeTree(null, 1, 3, 4);
 
@@ -179,7 +179,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function prevSibling(): void
+    public function prev_sibling(): void
     {
         static::makeTree(null, 1, 3, 4);
 
@@ -296,7 +296,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function whereDescendantOf(): void
+    public function where_descendant_of(): void
     {
         static::makeTree(null, 1, 3, 3, 1);
 
@@ -314,7 +314,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function whereAncestorOf(): void
+    public function where_ancestor_of(): void
     {
         static::makeTree(null, 1, 5, 2);
 
@@ -338,7 +338,7 @@ class NodeBuilderSingleTreeTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function cantCreateMultipleRoots(): void
+    public function cant_create_multiple_roots(): void
     {
         $root = (new Category(['title' => 'Root node']))->makeRoot();
         $root->save();

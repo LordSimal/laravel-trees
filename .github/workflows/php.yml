@@ -22,13 +22,16 @@ jobs:
           - laravel: 12.*
             php: 8.4
             testbench: 10.*
+          - laravel: 13.*
+            php: 8.4
+            testbench: 11.*
     #        exclude:
     #          - php: '8.2'
     #            setup: 'lowest'
 
     services:
       postgres:
-        image: postgres:16
+        image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -86,7 +89,7 @@ jobs:
 
       - name: Run test suite
         run: |
-            if [[ ${{ matrix.php }} == '8.3' && "${{ matrix.laravel }}" == "12.*" && "${{ matrix.setup }}" == "stable" ]]; then
+            if [[ ${{ matrix.php }} == '8.4' && "${{ matrix.laravel }}" == "13.*" && "${{ matrix.setup }}" == "stable" ]]; then
                 vendor/bin/phpunit --coverage-clover=coverage.xml
             else
                 vendor/bin/phpunit
@@ -99,7 +102,7 @@ jobs:
         run: composer cs-check
 
       - name: Upload coverage reports to Codecov
-        if: success() && matrix.php == '8.3' && matrix.laravel == '12.*' && matrix.setup == 'stable'
+        if: success() && matrix.php == '8.4' && matrix.laravel == '13.*' && matrix.setup == 'stable'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

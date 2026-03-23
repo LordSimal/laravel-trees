@@ -13,7 +13,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     protected static string $modelClass = Category::class;
 
     #[Test]
-    public function fixWithoutErrors(): void
+    public function fix_without_errors(): void
     {
         $this->makeTree(null, 1, 2, 4);
 
@@ -21,7 +21,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithOddnessError(): void
+    public function fix_with_oddness_error(): void
     {
         $this->makeTree(null, 1, 2, 4);
 
@@ -40,7 +40,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithOddnessErrorAndParent(): void
+    public function fix_with_oddness_error_and_parent(): void
     {
         $this->makeTree(null, 1, 2, 3);
 
@@ -59,7 +59,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithAdjustedRightValueInSubtree(): void
+    public function fix_with_adjusted_right_value_in_subtree(): void
     {
         $this->makeTree(null, 1, 2, 3);
 
@@ -88,7 +88,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithDuplicateError(): void
+    public function fix_with_duplicate_error(): void
     {
         $this->makeTree(null, 1, 2);
 
@@ -108,7 +108,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithWrongParentError(): void
+    public function fix_with_wrong_parent_error(): void
     {
         $this->makeTree(null, 1, 2, 1);
 
@@ -127,7 +127,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithMissingParentError(): void
+    public function fix_with_missing_parent_error(): void
     {
         $this->makeTree(null, 1, 2);
 
@@ -146,7 +146,7 @@ class FixingTraitTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithMultiCallWorks(): void
+    public function fix_with_multi_call_works(): void
     {
         $this->makeTree(null, 1, 2, 4);
 

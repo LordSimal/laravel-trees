@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Collection as BaseCollection;
 use Illuminate\Database\Eloquent\Model;
 use LordSimal\LaravelTrees\Config\Helper;
 use LordSimal\LaravelTrees\Exceptions\Exception;
+use LordSimal\LaravelTrees\Traits\UseConfigShorter;
+use LordSimal\LaravelTrees\Traits\UseTree;
 
 /**
  * @template TKey of array-key
@@ -57,7 +59,7 @@ class Collection extends BaseCollection
             $fromNode = $fromNode->getKey();
         }
 
-        /** @var \Illuminate\Database\Eloquent\Model|\LordSimal\LaravelTrees\Traits\UseConfigShorter $node */
+        /** @var Model|UseConfigShorter $node */
         foreach ($this->items as $node) {
             if ($node->parentValue() === $fromNode) {
                 $items[] = $node;
@@ -91,10 +93,10 @@ class Collection extends BaseCollection
             throw new Exception('Model should be a Tree Node');
         }
 
-        /** @var \LordSimal\LaravelTrees\Traits\UseTree $model */
+        /** @var UseTree $model */
         $groupedNodes = $this->groupBy($model->parentAttribute());
 
-        /** @var \LordSimal\LaravelTrees\Traits\UseTree|\Illuminate\Database\Eloquent\Model $node */
+        /** @var UseTree|Model $node */
         foreach ($this->items as $node) {
             if (! $node->parentValue()) {
                 $node->setRelation('parent', null);
@@ -102,7 +104,7 @@ class Collection extends BaseCollection
 
             $children = $groupedNodes->get($node->getKey(), []);
             if ($setParentRelations) {
-                /** @var \LordSimal\LaravelTrees\Traits\UseTree|\Illuminate\Database\Eloquent\Model $child */
+                /** @var UseTree|Model $child */
                 foreach ($children as $child) {
                     $child->setRelation('parent', $node);
                 }
@@ -137,13 +139,13 @@ class Collection extends BaseCollection
         $nodeIds = $this->pluck('id', 'id')->all();
         $collection = $this->sortByDesc(static fn ($item) => $item->levelValue());
 
-        /** @var \Illuminate\Database\Eloquent\Model|\LordSimal\LaravelTrees\Traits\UseTree $node */
+        /** @var Model|UseTree $node */
         foreach ($collection as $node) {
             if (! $node instanceof Model || $node->isRoot() || isset($nodeIds[$node->parentValue()])) {
                 continue;
             }
 
-            /** @var \LordSimal\LaravelTrees\Collection $parents */
+            /** @var Collection $parents */
             $parents = $node->parentsBuilder()
                 ->whereNotIn($node->getKeyName(), $nodeIds)
                 ->get();

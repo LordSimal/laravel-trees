@@ -13,7 +13,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
     protected static string $modelClass = MultiCategory::class;
 
     #[Test]
-    public function fixWithoutErrors(): void
+    public function fix_without_errors(): void
     {
         $this->makeTree(null, 1, 2, 4);
         $this->makeTree(null, 1, 2, 4);
@@ -28,7 +28,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithOddnessError(): void
+    public function fix_with_oddness_error(): void
     {
         $this->makeTree(null, 1, 2, 4);
         $this->makeTree(null, 1, 2, 4);
@@ -48,7 +48,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithDuplicateError(): void
+    public function fix_with_duplicate_error(): void
     {
         $this->makeTree(null, 1, 2);
         $this->makeTree(null, 1, 2);
@@ -69,7 +69,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithWrongParentError(): void
+    public function fix_with_wrong_parent_error(): void
     {
         $this->makeTree(null, 1, 2, 1);
         $this->makeTree(null, 1, 2, 1);
@@ -89,7 +89,7 @@ class FixingTraitMultiTest extends AbstractUnitTestCase
     }
 
     #[Test]
-    public function fixWithMissingParentError(): void
+    public function fix_with_missing_parent_error(): void
     {
         $this->makeTree(null, 1, 2);
         $this->makeTree(null, 1, 2);

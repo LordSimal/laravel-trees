@@ -8,7 +8,7 @@ use Illuminate\Database\Query\Builder;
 use LordSimal\LaravelTrees\EloquentQueryBuilder;
 
 /**
- * @mixin \LordSimal\LaravelTrees\EloquentQueryBuilder<static>
+ * @mixin EloquentQueryBuilder<static>
  */
 trait Healthy
 {
